@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+      - name: Gradle Build
+        run: |
+          chmod +x gradlew
+          ./gradlew build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lightcity jars
+          path: ./build/libs/*.jar
