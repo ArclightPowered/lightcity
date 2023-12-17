@@ -23,7 +23,7 @@ public class ModernForgeConnectionType extends ConnectionTypeImpl {
         return super.addGameProfileTokensIfRequired(
             original
                 .addProperty(IS_FORGE_CLIENT_PROPERTY)
-                .addProperty(new GameProfile.Property("extraData", this.extra, "")),
+                .addProperty(new GameProfile.Property("extraData", this.extra.replaceAll("\0", "\1"), "")),
             forwardingType);
     }
 }
