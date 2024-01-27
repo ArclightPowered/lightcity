@@ -10,7 +10,7 @@ import com.velocitypowered.proxy.config.PlayerInfoForwarding;
 import com.velocitypowered.proxy.config.VelocityConfiguration;
 import com.velocitypowered.proxy.connection.client.InitialInboundConnection;
 import com.velocitypowered.proxy.connection.client.LoginInboundConnection;
-import com.velocitypowered.proxy.protocol.packet.Handshake;
+import com.velocitypowered.proxy.protocol.packet.HandshakePacket;
 import org.slf4j.Logger;
 
 import java.util.Locale;
@@ -46,7 +46,7 @@ public class Lightcity {
         var initConn = (InitialInboundConnection) delegateField.get(connection);
         var field = InitialInboundConnection.class.getDeclaredField("handshake");
         field.setAccessible(true);
-        var handshake = (Handshake) field.get(initConn);
+        var handshake = (HandshakePacket) field.get(initConn);
         var host = handshake.getServerAddress();
         if (host.contains("\0")) {
             var split = host.split("\0", 2);
